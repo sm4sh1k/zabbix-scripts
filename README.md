@@ -1,8 +1,9 @@
-Scripts for Zabbix agent running on Windows
+Scripts for Zabbix agent running on Windows (and UNIX)
 ==============
 
-My collection of scripts for zabbix agents on Windows hosts.
+My collection of scripts for zabbix agents on Windows and UNIX hosts.
 All scripts are designed to use with passive checks and most of them are written on PowerShell.
+Appropriate templates are also included.
 
 ## List of scripts
 
