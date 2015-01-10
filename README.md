@@ -7,7 +7,7 @@ Appropriate templates are also included.
 
 ## List of scripts
 
-* **apc_check.ps1**(and **apc_check.cmd**). Script for parsing text file apcupsd.status generated automaticaly by apcupsd (read documentation for apcupsd to do this). It has one input parameter *item* and returns value in appropriate field of file. The CMD version is more lightweight and simple than PowerShell version of script. You can use any of them.
+* **apc_check.ps1**(and also **apc_check.cmd** and **apc_check.sh**). Script for parsing text file *apcupsd.status* generated automaticaly by apcupsd (read documentation for apcupsd to do this). It has one input parameter *item* and returns value in appropriate field of file. The CMD and BASH versions are more lightweight and simple than PowerShell version of script. You can use any of them. BASH sript is suitable for UNIX systems (like FreeBSD or Linux).
 
 * **raid_discovery.ps1**. Modificated version of discovery script placed on Zabbix wiki (https://www.zabbix.org/mw/index.php5?title=Templates/Intel_LSI_RAID&amp;diff=4548&amp;oldid=0). The main goal of modification is to use it with passive checks. For gathering information script uses utility CmdTool2 from Intel website.
 
