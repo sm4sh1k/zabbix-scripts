@@ -21,6 +21,7 @@ Import templates to Zabbix (all templates were tested on Zabbix 2.2).
 
 On Linux hosts you also have to add zabbix user to a sudoers list for running external executables from scripts.
 I just created **/etc/sudoers.d/zabbix_sudo** file and added to it next two lines:
+
 	Defaults:zabbix !requiretty
 	zabbix ALL=(ALL) NOPASSWD: /opt/MegaRAID/CmdTool2/CmdTool264
 
