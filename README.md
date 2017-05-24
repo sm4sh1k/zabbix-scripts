@@ -13,6 +13,8 @@ Appropriate templates are also included.
 
 * **raid_check.ps1**(and **raid_check.pl**). This is also modified script from mentioned article as above. The goal of modification is the same.
 
+* **nut_check.ps1**. Script for getting information about UPS from NUT (Network UPS Tools) on Windows. It can make discovery and find all connected devices (*-mode discovery*). With parameter *-mode status* it returns requested information (parameter *-item*) for appropriate device (parameter *-upsname*). In its job script uses *upsc* utility shipped with NUT. A little guide how to install NUT on Windows can be found here: https://github.com/networkupstools/nut/issues/262.
+
 ## Installation
 
 Put the scripts to folders you like and edit paths to files at the beginning of all scripts.
@@ -42,6 +44,10 @@ I just created **/etc/sudoers.d/zabbix_sudo** file and added to it next two line
 	# apc_check.ps1
 	UserParameter=apc.ups[*],powershell -File "C:\Zabbix\scripts\apc_check.ps1" -item $1
 	#UserParameter=apc.ups[*],C:\Zabbix\scripts\apc_check.cmd $1
+	
+	# nut_check.ps1
+	UserParameter=nut.discovery,powershell -File "C:\Zabbix\scripts\nut_check.ps1" -mode discovery
+	UserParameter=nut.ups[*],powershell -File "C:\Zabbix\scripts\nut_check.ps1" -mode status -upsname $1 -item $2
 	
 	# raid_check.pl
 	UserParameter=intel.raid.physical_disk[*],/usr/bin/perl -w /etc/zabbix/scripts/raid_check.pl -mode pdisk -item $4 -adapter $1 -enclosure $2 -pdisk $3
