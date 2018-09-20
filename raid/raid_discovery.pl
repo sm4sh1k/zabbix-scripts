@@ -49,9 +49,16 @@ for (my $adapter = 0; $adapter < $adp_count; $adapter++) {
 	
 	switch ($mode) {
 		case 'vdisk' {
-			for (my $vd = 0;$vd < $number_of_lds;$vd++) {
-				$virtual_drives{$vd} = "{ \"{#VDRIVE_ID}\":\"$vd\", \"{#ADAPTER_ID}\":\"$adapter\" }";
+			my @vd_list = `$cli -LDinfo -LAll -a $adapter`;
+			foreach my $vd_line (@vd_list) {
+				if ($vd_line =~ m/Virtual Drive:\s(\d+?)/) {
+						$virtual_drives{$1} = "{ \"{#VDRIVE_ID}\":\"$1\", \"{#ADAPTER_ID}\":\"$adapter\" }";
+					}
 			}
+			# Sometimes Virtual Drives are not numbered in sequential order -- comment old algorythm
+			#for (my $vd = 0;$vd < $number_of_lds;$vd++) {
+			#	$virtual_drives{$vd} = "{ \"{#VDRIVE_ID}\":\"$vd\", \"{#ADAPTER_ID}\":\"$adapter\" }";
+			#}
 		}
 		
 		case 'bbu' {
@@ -67,7 +74,7 @@ for (my $adapter = 0; $adapter < $adp_count; $adapter++) {
 		
 		case "pdisk" {
 			# Number of enclosures on adapter 0 -- 1
-			# There are no enclosures on some embedded LSI chips. If so let the enclosure ID be -1
+			# There are no enclosures on some embedded LSI chips. If so let the enclosure ID equals -1
 			my $enc_num = `$cli -EncInfo -a $adapter`;
 			if ($enc_num =~ m/.*Number\sof\senclosures\son\sadapter\s$adapter\s--\s(\d)\n.*/) {
 				$enc_num = $1;
